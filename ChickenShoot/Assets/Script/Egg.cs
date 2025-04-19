@@ -23,7 +23,7 @@ public class Egg : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Trứng trúng tàu! Game Over!");
-            //GameManager.Instance.GameOver(); Gọi màn hình game over
+            GameManager.Instance.GameOver();// Gọi màn hình game over
             Destroy(gameObject);
 
         }

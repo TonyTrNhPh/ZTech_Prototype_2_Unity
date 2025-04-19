@@ -70,6 +70,7 @@ public class Chicken : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             Debug.Log("Đạn trúng gà!");
+            GameManager.Instance.UpdateScore();
             Destroy(collision.gameObject); 
             Destroy(gameObject);
         }
