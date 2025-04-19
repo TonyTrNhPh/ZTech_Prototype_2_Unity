@@ -93,6 +93,9 @@ MonoBehaviour:
   verticalSpeed: 1
   horizontalSpeed: 2
   amplitude: 1
+  verticalAmplitude: 0
+  eggDropRate: 0.1
+  eggPrefab: {fileID: 5599898635686745557, guid: 1bd31f17e9b08e040b116d3c259eca4e, type: 3}
 --- !u!61 &8230682198581514667
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,10 +14,13 @@ public class Chicken : MonoBehaviour
     private Animator animator; // Tham chiếu đến Animator
     private Camera mainCamera;
 
+    public float eggDropRate = 0.1f;
+    public GameObject eggPrefab;
+
     void Start()
     {
         spawner = FindObjectOfType<ChickenSpawner>();
-        animator = GetComponent<Animator>(); // Lấy Animator
+        animator = GetComponent<Animator>(); 
 
         startX = transform.position.x;
         startY = transform.position.y;
@@ -27,28 +30,37 @@ public class Chicken : MonoBehaviour
         minY = (camHeight / 2) / 2f ;
         
 
-        // Đảm bảo animation "FLY" được chạy
         if (animator != null)
         {
-            animator.Play("Chicken_Animation - FLY"); // Tên animation có thể khác, kiểm tra trong Animator
+            animator.Play("Chicken_Animation - FLY"); 
+        }
+
+        if (eggPrefab == null)
+        {
+            Debug.LogError("Egg Prefab chưa được gán cho Chicken!");
+
         }
     }
 
     void Update()
     {       
-       // Di chuyển ngang theo sóng sin (zigzag)
         float newX = startX + Mathf.Sin(Time.time * horizontalSpeed) * amplitude;
 
-        // Dao động dọc trong nửa trên khung hình
+        
         float newY = startY + Mathf.Sin(Time.time * verticalSpeed) * verticalAmplitude;
         newY = Mathf.Clamp(newY, minY, startY);
 
         transform.position = new Vector3(newX, newY, 0);
 
-        // Xóa nếu ra khỏi màn hình
         if (transform.position.y < -10f)
         {
             Destroy(gameObject);
+        }
+
+        // Thả trứng ngẫu nhiên
+        if (Random.value < eggDropRate * Time.deltaTime)
+        {
+            Instantiate(eggPrefab, transform.position, Quaternion.identity);
         }
     }
 
@@ -58,8 +70,8 @@ public class Chicken : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             Debug.Log("Đạn trúng gà!");
-            Destroy(collision.gameObject); // Xóa đạn
-            Destroy(gameObject); // Xóa gà
+            Destroy(collision.gameObject); 
+            Destroy(gameObject);
         }
     }
 
