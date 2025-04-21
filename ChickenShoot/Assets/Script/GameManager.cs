@@ -71,15 +71,31 @@ public class GameManager : MonoBehaviour
         CurrentState = GameState.GameOver;
         ShowGameOver();
         // Thêm logic kết thúc game
+        GameObject[] chickens = GameObject.FindGameObjectsWithTag("Chicken");
+        foreach (GameObject chicken in chickens)
+        {
+            Destroy(chicken);
+        }
+        // Xóa trứng
+        GameObject[] eggs = GameObject.FindGameObjectsWithTag("Egg");
+        foreach (GameObject egg in eggs)
+        {
+            Destroy(egg);
+        }
     }
 
     // Restart game
     public void GameRestart()
     {
-        CurrentState = GameState.GameOver;
+        CurrentState = GameState.Playing;
         gameOverPanel.SetActive(false);
         // Thêm logic restart game
         scoreText.text = score.ToString();
+        ChickenSpawner spawner = FindObjectOfType<ChickenSpawner>();
+        if (spawner != null)
+        {
+            spawner.ResetSpawner();
+        }
     }
 
     // Exit game

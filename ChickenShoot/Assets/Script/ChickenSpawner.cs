@@ -46,25 +46,28 @@ public class ChickenSpawner : MonoBehaviour
 
     void Update()
     {
-        // Chỉ sinh gà nếu chưa vượt quá số lượng tối đa
-        if (currentChickens < maxChickens && Time.time > nextSpawn)
+        if (GameManager.Instance.CurrentState == GameManager.GameState.Playing) 
         {
-            nextSpawn = Time.time + spawnRate;
-            Vector3 spawnPosition = new Vector3(Random.Range(spawnXMin, spawnXMax), spawnY, 0);
-            GameObject chicken = Instantiate(chickenPrefab, spawnPosition, Quaternion.identity);
-            currentChickens++; // Tăng số đếm
-
-            // Đảm bảo scale của gà hợp lý
-            chicken.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Điều chỉnh nếu cần
-
-            // Gán các thông số chuyển động ngẫu nhiên
-            Chicken chickenScript = chicken.GetComponent<Chicken>();
-            if (chickenScript != null)
+            // Chỉ sinh gà nếu chưa vượt quá số lượng tối đa
+            if (currentChickens < maxChickens && Time.time > nextSpawn)
             {
-                chickenScript.horizontalSpeed = Random.Range(1f, 3f); // Tốc độ ngang ngẫu nhiên
-                chickenScript.amplitude = Random.Range(0.5f, 2f); // Biên độ ngang ngẫu nhiên
-                chickenScript.verticalSpeed = Random.Range(0.5f, 2f); // Tốc độ dọc ngẫu nhiên
-                chickenScript.verticalAmplitude = Random.Range(0.3f, 1f); // Biên độ dọc ngẫu nhiên
+                nextSpawn = Time.time + spawnRate;
+                Vector3 spawnPosition = new Vector3(Random.Range(spawnXMin, spawnXMax), spawnY, 0);
+                GameObject chicken = Instantiate(chickenPrefab, spawnPosition, Quaternion.identity);
+                currentChickens++; // Tăng số đếm
+
+                // Đảm bảo scale của gà hợp lý
+                chicken.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Điều chỉnh nếu cần
+
+                // Gán các thông số chuyển động ngẫu nhiên
+                Chicken chickenScript = chicken.GetComponent<Chicken>();
+                if (chickenScript != null)
+                {
+                    chickenScript.horizontalSpeed = Random.Range(1f, 3f); // Tốc độ ngang ngẫu nhiên
+                    chickenScript.amplitude = Random.Range(0.5f, 2f); // Biên độ ngang ngẫu nhiên
+                    chickenScript.verticalSpeed = Random.Range(0.5f, 2f); // Tốc độ dọc ngẫu nhiên
+                    chickenScript.verticalAmplitude = Random.Range(0.3f, 1f); // Biên độ dọc ngẫu nhiên
+                }
             }
         }
     }
@@ -73,5 +76,11 @@ public class ChickenSpawner : MonoBehaviour
     public void OnChickenDestroyed()
     {
         currentChickens--;
+    }
+
+    public void ResetSpawner()
+    {
+        currentChickens = 0;
+        nextSpawn = 0f;
     }
 }

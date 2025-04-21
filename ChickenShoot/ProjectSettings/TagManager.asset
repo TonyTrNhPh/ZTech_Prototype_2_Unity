@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Chicken
+  - Egg
   layers:
   - Default
   - TransparentFX
