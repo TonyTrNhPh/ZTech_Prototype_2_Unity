@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 26438f44a29959a4482fbfae3b5efdd5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - eggPrefab: {instanceID: 0}
+  - chickenDieSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

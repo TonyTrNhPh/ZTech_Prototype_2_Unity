@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public float fireRate = 0.2f;
     private float nextFire = 0f;
+
+    public AudioClip shootSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         // Lấy tham số camera chính
@@ -40,6 +44,11 @@ public class PlayerController : MonoBehaviour
         maxX -= spriteWìdth;
         minY += spriteHeight;
         maxY -= spriteHeight;
+
+        // Thêm và cấu hình AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.clip = shootSound;
     }
     void Update()
     {
@@ -57,6 +66,7 @@ public class PlayerController : MonoBehaviour
         // Bắn khi nhấn chuột trái
         if (Input.GetMouseButton(0) && Time.time > nextFire)
         {
+            audioSource.Play();
             nextFire = Time.time + fireRate;
             Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             bulletPrefab.tag = "Bullet";

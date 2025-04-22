@@ -17,6 +17,8 @@ public class Chicken : MonoBehaviour
     public float eggDropRate = 0.1f;
     public GameObject eggPrefab;
 
+    public AudioClip chickenDieSound;
+
     void Start()
     {
         spawner = FindObjectOfType<ChickenSpawner>();
@@ -69,6 +71,7 @@ public class Chicken : MonoBehaviour
         Debug.Log("Va chạm với: " + collision.gameObject.name + ", Tag: " + collision.tag);
         if (collision.CompareTag("Bullet"))
         {
+            AudioSource.PlayClipAtPoint(chickenDieSound, transform.position);
             Debug.Log("Đạn trúng gà!");
             GameManager.Instance.UpdateScore();
             Destroy(collision.gameObject); 

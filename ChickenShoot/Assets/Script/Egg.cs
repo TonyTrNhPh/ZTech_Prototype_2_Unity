@@ -3,6 +3,7 @@
 public class Egg : MonoBehaviour
 {
     private float speed = 5f; // Tốc độ rơi của trứng
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
