@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.Playing;
         startPanel.SetActive(false);
-        // Thêm logic khởi tạo game ở đây
     }
 
     // Tạm dừng game

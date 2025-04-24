@@ -66,6 +66,17 @@ public class Chicken : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Va chạm với: " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Gà trúng tàu! Game Over!");
+            GameManager.Instance.GameOver();// Gọi màn hình game over
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Va chạm với: " + collision.gameObject.name + ", Tag: " + collision.tag);
